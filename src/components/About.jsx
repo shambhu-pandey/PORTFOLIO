@@ -11,12 +11,13 @@ const About = () => {
     <br />
 
     <h1 className='text-orange-500 font-semibold text-xl'>Education</h1>
-    <span>
-      Bachelor of Computer Applications, Vellore Institute of Technology, 2022 - 2025, CGPA: 8.87<br/>
-      Class XII (BSEB), S.N College, 2020 - 2022, Percentage: 84%<br/>
-      Class X (CBSE), St Paul’s Senior Secondary School, 2012 - 2020
-    </span>
-    <br /><br />
+<span>
+  Master of Computer Applications (MCA), Vellore Institute of Technology, Chennai, 2025 - Present, CGPA: 9.31<br/>
+  Bachelor of Computer Applications (BCA), Vellore Institute of Technology, 2022 - 2025, CGPA: 8.9<br/>
+  Class XII (BSEB), S.N College, 2020 - 2022, Percentage: 84%<br/>
+  Class X (CBSE), St Paul’s Senior Secondary School, 2012 - 2020
+</span>
+<br /><br />
 
     <h1 className='text-orange-500 font-semibold text-xl'>Skills</h1>
     <span>
@@ -31,12 +32,17 @@ const About = () => {
     </span>
     <br /><br />
 
-    <h1 className="text-orange-500 font-semibold text-xl">Certifications</h1>
-    <span>
-      HTML, CSS, and JavaScript (Coursera), <a href="https://coursera.org/share/e3d5758a07be27b2eabc1e8a514fc47c" target="_blank" style={{color: 'blue'}}>Certification Link</a><br/>
-      React.js (Simplilearn), <a href="https://bit.ly/htmlcssandjavascript" target="_blank" style={{color: 'blue'}}>Certification Link</a><br/>
-      Data Structures and Algorithms (Simplilearn), <a href="https://www.simplilearn.com/skillup-certificate-landing?token=eyJjb3Vyc2VfaWQiOiIzMzczIiwiY2VydGlmaWNhdGVfdXJsIjoiaHR0cHM6XC9cL2NlcnRpZmljYXRlcy5zaW1wbGljZG4ubmV0XC9zaGFyZVwvdGh1bWJfNzQwMDc5M18xNzI3MTg1OTI5LnBuZyIsInVzZXJuYW1lIjoiU0hBTUJIVSBQQU5ERVkgIn0&referrer=https%3A%2F%2Fcertificates.simplicdn.net%2Fshare%2Fthumb_7400793_1727185929.png" target="_blank" style={{color: 'blue'}}>Certification Link</a>
-    </span>
+  <h1 className="text-orange-500 font-semibold text-xl">Certifications</h1>
+<span>
+  HTML, CSS, and JavaScript (Coursera), <a href="https://coursera.org/share/e3d5758a07be27b2eabc1e8a514fc47c" target="_blank" rel="noreferrer" style={{color: 'blue'}}>Certification Link</a><br/>
+  Supervised Machine Learning: Regression and Classification (Coursera), <a href="https://www.coursera.org/account/accomplishments/records/UL73HISAYLAL" target="_blank" rel="noreferrer" style={{color: 'blue'}}>Certification Link</a>
+  React.js (Simplilearn), <a href="https://bit.ly/htmlcssandjavascript" target="_blank" rel="noreferrer" style={{color: 'blue'}}>Certification Link</a><br/>
+
+  Data Structures and Algorithms (Simplilearn), <a href="https://www.simplilearn.com/skillup-certificate-landing?token=eyJjb3Vyc2VfaWQiOiIzMzczIiwiY2VydGlmaWNhdGVfdXJsIjoiaHR0cHM6XC9cL2NlcnRpZmljYXRlcy5zaW1wbGljZG4ubmV0XC9zaGFyZVwvdGh1bWJfNzQwMDc5M18xNzI3MTg1OTI5LnBuZyIsInVzZXJuYW1lIjoiU0hBTUJIVSBQQU5ERVkgIn0&referrer=https%3A%2F%2Fcertificates.simplicdn.net%2Fshare%2Fthumb_7400793_1727185929.png" target="_blank" rel="noreferrer" style={{color: 'blue'}}>Certification Link</a><br/>
+
+</span>
+
+    
     <br /><br />
 
     <h1 className="text-orange-500 font-semibold text-xl">Mission Statement</h1>
