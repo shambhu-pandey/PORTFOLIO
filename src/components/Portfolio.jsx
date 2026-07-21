@@ -1,187 +1,120 @@
-import React from "react";
-import java from "../../public/java.png";
-import react from "../../public/reactjs.png";
-import mongoDb from "../../public/mongodb.jpg";
-import express from "../../public/express.png";
-import css from "../../public/css.jpg";
-import html from "../../public/html.png";
-import javascript from "../../public/javascript.png";
+import React, { useMemo, useState } from "react";
+import { motion } from "framer-motion";
+import { profile } from '../data/profile';
+import reactLogo from "/reactjs.png";
+import javascriptLogo from "/javascript.png";
+import htmlLogo from "/html.png";
+import cssLogo from "/css.jpg";
+
+const projectData = profile.projects.map((project) => ({
+  ...project,
+  logo: project.title === 'Learning Management System' ? reactLogo : project.category === 'JavaScript' ? javascriptLogo : project.category === 'React' ? reactLogo : htmlLogo,
+}));
+
+const filters = ["All", "Featured", "React", "JavaScript"];
 
 const Portfolio = () => {
-  const cardItem = [
-    {
-      id: 4,
-      logo: react,
-      name: "ReactJs",
-      projects: [
-       
-        {
-          name: "Animated Website",
-          projectLink: "https://animatedwebsite-henna.vercel.app/",
-          sourceLink: "https://github.com/shambhu-pandey/74-animated-website",
-        },
-        {
-          name: "Register page",
-          projectLink: "https://signup-react-self.vercel.app/",
-          sourceLink: "https://github.com/shambhu-pandey/signup-react",
-        },
-        {
-          name: "Google - keep",
-          projectLink: "https://google-keep-react-wheat.vercel.app/",
-          sourceLink: "https://github.com/shambhu-pandey/google-keep-react",
-        },
-        {
-          name: "Increment - decrement",
-          projectLink: "https://increment-decrement-react.vercel.app/",
-          sourceLink: "https://github.com/shambhu-pandey/increment---decrement-react",
-        },
-        {
-          name: "Slot Machine Game",
-          projectLink: "https://slot-machine-game-phi.vercel.app/",
-          sourceLink: "https://github.com/shambhu-pandey/slot-machine-game",
-        },
-        {
-          name: "Api Pokemon",
-          projectLink: "https://api-pokemon-react-xi.vercel.app/",
-          sourceLink: "https://github.com/shambhu-pandey/Api-pokemon-react",
-        },
-        {
-          name: "Accordian",
-          projectLink: "https://basic-accordian-react.vercel.app/",
-          sourceLink: "https://github.com/shambhu-pandey/basic-accordian-react",
-        },
-        {
-          name: "Basic form",
-          projectLink: "https://basic-form-react.vercel.app/",
-          sourceLink: "https://github.com/shambhu-pandey/basic-form-react",
-        },
-      ],
-    },
-    {
-      id: 3,
-      logo: javascript,
-      name: "JavaScript",
-      projects: [
-        {
-          name: "Calculate BMI Index",
-          projectLink: "https://thriving-melba-a54b3c.netlify.app/",
-          sourceLink: "https://github.com/shambhu-pandey",
-        },
-        {
-          name: "Colour Scheme Switcher",
-          projectLink: "https://helpful-pixie-110b0f.netlify.app/",
-          sourceLink: "https://github.com/shambhu-pandey",
-        },
-        {
-          name: "Your Local Time",
-          projectLink: "https://starlit-torte-d52f12.netlify.app/",
-          sourceLink: "https://github.com/shambhu-pandey",
-        },
-        {
-          name: "Todo App",
-          projectLink: "https://iridescent-maamoul-991ec0.netlify.app/",
-          sourceLink: "https://github.com/shambhu-pandey",
-        },
-      ],
-    },
-    {
-      id: 1,
-      logo: html,
-      name: "HTML",
-      projects: [
-        {
-          name: "Myntra Home Page Clone",
-          projectLink: "https://fastidious-tiramisu-9b13aa.netlify.app/",
-          sourceLink: "hhttps://github.com/shambhu-pandey",
-        },
-        {
-          name: "Dhaba Famous Food",
-          projectLink: "https://joyful-profiterole-3d8804.netlify.app/",
-          sourceLink: "https://github.com/shambhu-pandey",
-        },
-        {
-          name: "Cards design",
-          projectLink: "https://gilded-flan-bdc0f4.netlify.app/",
-          sourceLink: "https://github.com/shambhu-pandey",
-        },
-      ],
-    },
-    {
-      id: 2,
-      logo: css,
-      name: "CSS and Bootstrap",
-      projects: [
-        {
-          name: "Digital Solution",
-          projectLink: "https://project-digital-sol-main.vercel.app/",
-          sourceLink: "https://github.com/shambhu-pandey/project-digital-solution",
-        },
-        {
-          name: "Myntra Home Page Clone",
-          projectLink: "https://fastidious-tiramisu-9b13aa.netlify.app/",
-          sourceLink: "https://github.com/shambhu-pandey",
-        },
-      ],
-    },
-    
-    
-    // {
-    //   id: 5,
-    //   logo: express,
-    //   name: "Express",
-    //   projects: [
-    //     {
-    //       name: "Express Project",
-    //       projectLink: "https://project-express.vercel.app/",
-    //       sourceLink: "https://github.com/your-repo/express-project",
-    //     },
-      
-    //   ],
-    // },
-  ];
+  const [activeFilter, setActiveFilter] = useState("All");
+
+  const filteredProjects = useMemo(() => {
+    if (activeFilter === "All") return projectData;
+    return projectData.filter((project) => project.category === activeFilter);
+  }, [activeFilter]);
 
   return (
-    <div
-      name="Portfolio"
-      className="max-w-screen-2xl container mx-auto px-4 md:px-20 my-20"
-    >
-      <h1 className="text-3xl font-bold mb-5 text-center">Portfolio</h1>
-      <span className="underline font-semibold mb-5 block text-center">Featured Projects</span>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 my-5">
-        {cardItem.map(({ id, logo, name, projects }) => (
-          <div
-            className="border border-gray-300 rounded-lg shadow-lg p-4 hover:shadow-xl transition-shadow duration-200"
-            key={id}
-          >
-            <img
-              src={logo}
-              className="w-20 h-20 mb-4 mx-auto rounded-full border-2"
-              alt={`${name} logo`}
-            />
-            <h2 className="font-bold text-xl text-center mb-2">{name}</h2>
-            <div className="flex flex-col space-y-4">
-              {projects.map((project, index) => (
-                <div key={index} className="text-center">
-                  <p className="text-md font-semibold">{project.name}</p>
-                  <div className="flex justify-center space-x-2 mt-1">
-                    <a href={project.projectLink} target="_blank" rel="noopener noreferrer">
-                      <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold px-3 py-1 rounded">
-                        View Project
-                      </button>
-                    </a>
-                    <a href={project.sourceLink} target="_blank" rel="noopener noreferrer">
-                      <button className="bg-green-500 hover:bg-green-700 text-white font-bold px-3 py-1 rounded">
-                        Source Code
-                      </button>
-                    </a>
-                  </div>
-                </div>
-              ))}
+    <section id="projects" name="Portfolio" className="py-5 py-lg-6">
+      <div className="container py-5">
+        <div className="text-center mb-5">
+          <p className="text-uppercase small fw-semibold text-[#00F5A0] letter-spacing">Projects</p>
+          <h2 className="display-6 fw-semibold text-white">Featured work that reflects my growth as a developer</h2>
+        </div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.5 }}
+          className="glass-card p-4 p-lg-5 mb-4"
+        >
+          <div className="row g-4 align-items-center">
+            <div className="col-12 col-lg-7">
+              <p className="text-[#00F5A0] small fw-semibold mb-2">Top Featured Project</p>
+              <h3 className="h3 text-white mb-3">Learning Management System</h3>
+              <p className="text-[#94A3B8] mb-3">A modern learning platform with role-based authentication, dashboards, course management, video learning, assignments, quizzes, and certificates.</p>
+              <div className="d-flex flex-wrap gap-2 mb-3">
+                {['React', 'Node.js', 'Express', 'MongoDB', 'REST API'].map((tech) => (
+                  <span key={tech} className="small rounded-pill px-2 py-1" style={{ background: 'rgba(0,245,160,0.12)', color: '#00F5A0' }}>{tech}</span>
+                ))}
+              </div>
+              <div className="d-flex flex-wrap gap-2">
+                <a href="https://lms-learnit-frontend.onrender.com" target="_blank" rel="noreferrer" className="btn btn-accent btn-sm">Live Demo</a>
+                <a href="https://github.com/shambhu-pandey" target="_blank" rel="noreferrer" className="btn btn-outline-accent btn-sm">GitHub</a>
+              </div>
+            </div>
+            <div className="col-12 col-lg-5">
+              <div className="glass-card p-3">
+                <ul className="list-unstyled mb-0 text-[#94A3B8] d-flex flex-column gap-2">
+                  {['Role Based Authentication', 'Student Dashboard', 'Instructor Dashboard', 'Admin Panel', 'Course Management', 'Video Learning', 'Assignments', 'Quiz', 'Certificates', 'Responsive Design'].map((item) => (
+                    <li key={item} className="d-flex align-items-center gap-2"><span className="rounded-circle" style={{ width: 8, height: 8, background: '#00F5A0' }} />{item}</li>
+                  ))}
+                </ul>
+              </div>
             </div>
           </div>
-        ))}
+        </motion.div>
+
+        <div className="d-flex flex-wrap justify-content-center gap-2 mb-4">
+          {filters.map((filter) => (
+            <button
+              key={filter}
+              onClick={() => setActiveFilter(filter)}
+              className={`btn btn-sm ${activeFilter === filter ? "btn-accent" : "btn-outline-accent"}`}
+            >
+              {filter}
+            </button>
+          ))}
+        </div>
+
+        <div className="row g-4">
+          {filteredProjects.map((project, index) => (
+            <motion.div
+              key={project.id}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.5, delay: index * 0.05 }}
+              className="col-12 col-md-6 col-lg-4"
+            >
+              <div className="glass-card p-4 h-100 d-flex flex-column hover-lift">
+                <div className="d-flex align-items-center justify-content-between mb-3">
+                  <img src={project.logo} className="rounded-3" alt={project.title} style={{ width: 48, height: 48, objectFit: "cover" }} />
+                  <span className="rounded-pill px-3 py-1 small text-[#00F5A0]" style={{ background: "rgba(0,245,160,0.12)" }}>
+                    {project.category}
+                  </span>
+                </div>
+                <h3 className="h5 text-white mb-2">{project.title}</h3>
+                <p className="text-[#94A3B8] mb-3">{project.description}</p>
+                <div className="d-flex flex-wrap gap-2 mb-4">
+                  {project.tech.map((tech) => (
+                    <span key={tech} className="small rounded-pill px-2 py-1" style={{ background: "rgba(255,255,255,0.08)", color: "#FFFFFF" }}>
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+                <div className="mt-auto d-flex gap-2 flex-wrap">
+                  <a href={project.demo} target="_blank" rel="noreferrer" className="btn btn-accent btn-sm">
+                    Live Demo
+                  </a>
+                  <a href={project.github} target="_blank" rel="noreferrer" className="btn btn-outline-accent btn-sm">
+                    GitHub
+                  </a>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
       </div>
-    </div>
+    </section>
   );
 };
 

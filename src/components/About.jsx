@@ -1,58 +1,102 @@
-import React from 'react'
+import React from "react";
+import { motion } from "framer-motion";
+import { FaGraduationCap, FaHeart, FaLightbulb, FaUser, FaCodeBranch } from "react-icons/fa";
+import { profile } from '../data/profile';
+
+const aboutCards = [
+  {
+    title: "Who I am",
+    body: "I’m a developer focused on building responsive, scalable, and user-friendly web applications with a strong emphasis on clean architecture and modern UI.",
+    icon: <FaUser className="text-[#00F5A0]" size={20} />,
+  },
+  {
+    title: "Career Objective",
+    body: "My goal is to build impactful products that blend polished user experiences with strong engineering fundamentals and scalable full-stack solutions.",
+    icon: <FaLightbulb className="text-[#FACC15]" size={20} />,
+  },
+  {
+    title: "Current Focus",
+    body: "I’m currently pursuing my MCA while deepening my expertise in frontend development, backend development, React, Node.js, Express, MongoDB, JavaScript, C++, DSA, and REST APIs.",
+    icon: <FaGraduationCap className="text-[#00F5A0]" size={20} />,
+  },
+  {
+    title: "Interests",
+    body: "I’m enthusiastic about responsive UI, database design, REST APIs, performance, problem solving, and turning ideas into polished web products.",
+    icon: <FaHeart className="text-[#FACC15]" size={20} />,
+  },
+];
+
+const timeline = profile.education;
 
 const About = () => {
   return (
-    <div name="About" className='max-w-screen-2xl container mx-auto px-4 md:px-20 my-20'>
-  <div>
-    <h1 className='text-3xl font-bold mb-5'>About</h1>
-    <p>
-      Hello, I'm Shambhu, a dedicated web developer with a strong interest in front-end technologies. As a fresher currently pursuing a Bachelor of Computer Applications from Vellore Institute of Technology.
-    </p>
-    <br />
+    <section id="about" name="About" className="py-5 py-lg-6">
+      <div className="container py-5">
+        <div className="text-center mb-5">
+          <p className="text-uppercase small fw-semibold text-[#00F5A0] letter-spacing">About</p>
+          <h2 className="display-6 fw-semibold text-white">Building experiences that feel premium, thoughtful, and fast</h2>
+        </div>
 
-    <h1 className='text-orange-500 font-semibold text-xl'>Education</h1>
-<span>
-  Master of Computer Applications (MCA), Vellore Institute of Technology, Chennai, 2025 - Present, CGPA: 9.31<br/>
-  Bachelor of Computer Applications (BCA), Vellore Institute of Technology, 2022 - 2025, CGPA: 8.9<br/>
-  Class XII (BSEB), S.N College, 2020 - 2022, Percentage: 84%<br/>
-  Class X (CBSE), St Paul’s Senior Secondary School, 2012 - 2020
-</span>
-<br /><br />
+        <div className="row g-4 mb-5">
+          {aboutCards.map((card, index) => (
+            <motion.div
+              key={card.title}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.5, delay: index * 0.08 }}
+              className="col-12 col-md-6"
+            >
+              <div className="glass-card p-4 h-100">
+                <div className="d-flex align-items-center gap-3 mb-3">
+                  <div className="rounded-circle p-2 bg-white bg-opacity-10">{card.icon}</div>
+                  <h3 className="h5 mb-0 text-white">{card.title}</h3>
+                </div>
+                <p className="text-[#94A3B8] mb-0">{card.body}</p>
+              </div>
+            </motion.div>
+          ))}
+        </div>
 
-    <h1 className='text-orange-500 font-semibold text-xl'>Skills</h1>
-    <span>
-      C++, C, Java, HTML, CSS, JavaScript, React, React Hooks, Node.js, Bootstrap, MySQL, Operating System, Computer Network<br/>
-    </span>
-    <br />
+        <div className="glass-card p-4 p-lg-5">
+          <div className="row g-4 align-items-start">
+            <div className="col-12 col-lg-7">
+              <h3 className="h4 text-white mb-3">Professional journey</h3>
+              <p className="text-[#94A3B8]">
+                My academic foundation and hands-on practice have shaped a strong base in web development, problem solving, and building applications with a modern technical stack.
+              </p>
+            </div>
+            <div className="col-12 col-lg-5">
+              <div className="position-relative ps-4">
+                <div className="position-absolute start-0 top-0 bottom-0" style={{ width: '2px', background: 'linear-gradient(180deg, #00F5A0, rgba(255,255,255,0.2))' }} />
+                {timeline.map((item, index) => (
+                  <motion.div
+                    key={item.degree}
+                    initial={{ opacity: 0, x: -18 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true, amount: 0.2 }}
+                    transition={{ duration: 0.45, delay: index * 0.08 }}
+                    className="position-relative mb-4"
+                  >
+                    <div className="position-absolute" style={{ left: '-1.2rem', top: '0.35rem', width: '12px', height: '12px', borderRadius: '50%', background: item.type === 'MCA' ? '#00F5A0' : item.type === 'BCA' ? '#FACC15' : '#94A3B8' }} />
+                    <div className="glass-card p-3">
+                      <div className="d-flex align-items-center gap-2 text-[#00F5A0] mb-2">
+                        <FaCodeBranch size={14} />
+                        <span className="small fw-semibold">{item.period}</span>
+                      </div>
+                      <h4 className="h6 text-white mb-1">{item.degree}</h4>
+                      <p className="text-[#94A3B8] mb-1">{item.institution}</p>
+                      {item.cgpa ? <p className="text-[#FACC15] mb-0">CGPA: {item.cgpa}</p> : null}
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
 
-    <h1 className="text-orange-500 font-semibold text-xl">Achievements & Awards</h1>
-    <span>
-      Participant, Solve-thon 2024<br/>
-      Volunteered at Riveria, VIT, 2024
-    </span>
-    <br /><br />
-
-  <h1 className="text-orange-500 font-semibold text-xl">Certifications</h1>
-<span>
-  HTML, CSS, and JavaScript (Coursera), <a href="https://coursera.org/share/e3d5758a07be27b2eabc1e8a514fc47c" target="_blank" rel="noreferrer" style={{color: 'blue'}}>Certification Link</a><br/>
-  Supervised Machine Learning: Regression and Classification (Coursera), <a href="https://www.coursera.org/account/accomplishments/records/UL73HISAYLAL" target="_blank" rel="noreferrer" style={{color: 'blue'}}>Certification Link</a>
-  React.js (Simplilearn), <a href="https://bit.ly/htmlcssandjavascript" target="_blank" rel="noreferrer" style={{color: 'blue'}}>Certification Link</a><br/>
-
-  Data Structures and Algorithms (Simplilearn), <a href="https://www.simplilearn.com/skillup-certificate-landing?token=eyJjb3Vyc2VfaWQiOiIzMzczIiwiY2VydGlmaWNhdGVfdXJsIjoiaHR0cHM6XC9cL2NlcnRpZmljYXRlcy5zaW1wbGljZG4ubmV0XC9zaGFyZVwvdGh1bWJfNzQwMDc5M18xNzI3MTg1OTI5LnBuZyIsInVzZXJuYW1lIjoiU0hBTUJIVSBQQU5ERVkgIn0&referrer=https%3A%2F%2Fcertificates.simplicdn.net%2Fshare%2Fthumb_7400793_1727185929.png" target="_blank" rel="noreferrer" style={{color: 'blue'}}>Certification Link</a><br/>
-
-</span>
-
-    
-    <br /><br />
-
-    <h1 className="text-orange-500 font-semibold text-xl">Mission Statement</h1>
-    <p>
-      My goal is to apply my front-end development skills to build engaging and responsive web applications. I am eager to learn, grow, and contribute to meaningful projects in the tech industry.
-    </p>
-  </div>
-</div>
-
-  )
-}
-
-export default About
+export default About;

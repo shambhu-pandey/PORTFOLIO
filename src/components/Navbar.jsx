@@ -1,108 +1,80 @@
-import React, { useEffect, useState } from "react";
-import pic from "../../public/shambhuu.jpg";
+import React, { useState } from "react";
 import { IoMenu } from "react-icons/io5";
 import { IoCloseSharp } from "react-icons/io5";
-import {Link} from "react-scroll";
+import { Link } from "react-scroll";
+import { profile } from '../data/profile';
 
 const Navbar = () => {
-  // state manage kar rhe hai menu par click hai ki nhi 
-  const[menu , setMenu] = useState(false);
+  const [menu, setMenu] = useState(false);
   const navItems = [
-    {
-     id:1,
-     text:"Home"
-    },
-    {
-      id:2,
-      text:"About"
-     },
-     {
-      id:3,
-      text:"Portfolio"
-     },
-    //  {
-    //   id:4,
-    //   text:"Experiance"
-    //  },
-     {
-      id:5,
-      text:"Contacts"
-     },
-  ]
+    { id: 1, text: "Home", to: "home" },
+    { id: 2, text: "About", to: "about" },
+    { id: 3, text: "Projects", to: "projects" },
+    { id: 4, text: "Skills", to: "skills" },
+    { id: 5, text: "Education", to: "education" },
+    { id: 6, text: "Achievements", to: "achievements" },
+    { id: 7, text: "Contact", to: "contact" },
+  ];
+
   return (
-    <>
-    {/* max width diye hai full screen par container reponsive ke liye margin x axis se auto padding x se 4 shadow-md par height 16 de diye navbar ka toh shadow bhi aa jaayega   , z-50 se aur bg-white se jo navbar me ja rha tha usko manage kar liye*/}
-      <div className="max-w-screen-2xl container mx-auto px-4 md:px-20 shadow-md h-18  fixed top-0 left-0 right-0 z-50 bg-white">
-        <div className="flex justify-between items-center h-18">
-                  <div className=" flex space-x-2">
-                    <img src={pic} className="h-12 w-12 rounded-full" alt=""/>
-                    <h1 className="font-semibold text-xl cursor-pointer">Shambhu <span className="text-orange-500 text-2xl">P</span>andey
-                    <p className="text-sm">Web Developer</p>
-                    </h1>
-                  </div>
-                   <div>
-                    {/* chote device par hidden kiye hai aur bde par dikha rhe hai  */}
-                    {/* desktop navabr */}
-                    <ul className="hidden md:flex space-x-8 ">
-                         {/* <li>Home</li>
-                    <li>About</li>
-                    <li>Portfolio</li>
-                    <li>Experience</li>
-                    <li>Contacts</li> */}
-                     
-                     {
-                      navItems.map(({id , text})=>(
-                       <li className=" hover:scale-105 duration-200 cursor-pointer" key={id}>
-                        <Link 
-                        to={text}
-                        smooth={true}
-                        duration={500}
-                        offset={-70}
-                        activeClass="active"
-                        > {text}</Link>
-                        </li>
-                      ))
-                     }
-                    </ul>
-                    {/*menu desktop aur mobile ke middle me rkhenge desktop me hidden aur mobile me dikhayenge */}
-                    <div onClick={()=>setMenu(!menu)} className="md:hidden"> {menu ? 
-                      <IoCloseSharp size={24}/> :<IoMenu size={24}/>}
-                    </div>
-                   
-                   </div>
+    <header className="position-sticky top-0 z-3">
+      <div className="container py-3 px-3 px-lg-4">
+        <div className="glass-card px-3 px-lg-4 py-3 d-flex align-items-center justify-content-between rounded-pill">
+          <Link to="home" smooth={true} duration={500} className="d-flex align-items-center gap-3 text-decoration-none cursor-pointer">
+            <img src={profile.photo} className="rounded-circle" alt={profile.name} style={{ width: 46, height: 46, objectFit: "cover" }} />
+            <div>
+              <div className="fw-semibold text-white">{profile.name.split(' ')[0]}.Pandey</div>
+              <div className="small text-[#94A3B8]">{profile.title}</div>
+            </div>
+          </Link>
+
+          <div className="d-none d-lg-flex align-items-center gap-4">
+            {navItems.map(({ id, text, to }) => (
+              <Link
+                key={id}
+                to={to}
+                smooth={true}
+                duration={500}
+                offset={-70}
+                className="text-decoration-none text-[#94A3B8] fw-medium hover-text-accent"
+              >
+                {text}
+              </Link>
+            ))}
+            <a href={profile.resume} download className="btn btn-sm btn-outline-accent">
+              Resume
+            </a>
+          </div>
+
+          <div className="d-lg-none text-white" onClick={() => setMenu(!menu)}>
+            {menu ? <IoCloseSharp size={24} /> : <IoMenu size={24} />}
+          </div>
         </div>
-        {/* mobile navbar */}
-         {/* medium  device par hidden kiye hai aur chote par dikhega  */}
-         {
-          menu && (
-             <div className="bg-white">
-        <ul className="md:hidden flex flex-col h-screen items-center justify-center space-y-3 text-xl"> 
-                  {/* <li>Home</li>
-                    <li>About</li>
-                    <li>Portfolio</li>
-                    <li>Experience</li>
-                    <li>Contacts</li> */}
-                     {
-                      navItems.map(({id , text})=>(
-                       <li className=" hover:scale-150 duration-200 cursor-pointer" key={id}>
-                        <Link 
-                        to={text}
-                        onClick={()=>setMenu(!menu)} 
-                        smooth={true}
-                        duration={500}
-                        offset={-70}
-                        activeClass="active"
-                        > {text}</Link>
-                        </li>
-                      ))
-                     }
-                    </ul>
+
+        {menu && (
+          <div className="glass-card rounded-4 mt-3 p-3 d-lg-none">
+            <div className="d-flex flex-column gap-3">
+              {navItems.map(({ id, text, to }) => (
+                <Link
+                  key={id}
+                  to={to}
+                  onClick={() => setMenu(false)}
+                  smooth={true}
+                  duration={500}
+                  offset={-70}
+                  className="text-decoration-none text-white fw-medium"
+                >
+                  {text}
+                </Link>
+              ))}
+              <a href={profile.resume} download className="btn btn-sm btn-outline-accent w-50">
+                Resume
+              </a>
+            </div>
+          </div>
+        )}
       </div>
-          )
-         }
-        
-      </div>
-    </>
+    </header>
   );
 };
 
